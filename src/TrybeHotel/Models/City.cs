@@ -5,6 +5,7 @@ namespace TrybeHotel.Models
 
     // 1. Implemente as models da aplicação
     public class City {
-
+     
+     string name;
     }
 }
