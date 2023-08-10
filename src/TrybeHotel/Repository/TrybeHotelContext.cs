@@ -5,10 +5,13 @@ namespace TrybeHotel.Repository;
 public class TrybeHotelContext : DbContext, ITrybeHotelContext
 {
 
-    public TrybeHotelContext(DbContextOptions<TrybeHotelContext> options) : base(options) { }
     public DbSet<City> Cities { get; set; } = null!;
     public DbSet<Hotel> Hotels { get; set; } = null!;
     public DbSet<Room> Rooms { get; set; } = null!;
+    public TrybeHotelContext(DbContextOptions<TrybeHotelContext> options) : base(options) { }
+    public TrybeHotelContext() { }
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
@@ -34,5 +37,4 @@ public class TrybeHotelContext : DbContext, ITrybeHotelContext
         .WithMany(hotel => hotel.Rooms)
         .HasForeignKey(room => room.HotelId);
     }
-    public TrybeHotelContext() { }
 }
