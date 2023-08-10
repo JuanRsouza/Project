@@ -19,13 +19,13 @@ namespace TrybeHotel.Controllers
         // 4. Desenvolva o endpoint GET /hotel
         [HttpGet]
         public IActionResult GetHotels(){
-            throw new NotImplementedException();
+           return Ok(_repository.GetHotels());
         }
 
         // 5. Desenvolva o endpoint POST /hotel
         [HttpPost]
         public IActionResult PostHotel([FromBody] Hotel hotel){
-            throw new NotImplementedException();
+            return Created("",_repository.AddHotel(hotel));
         }
 
 
