@@ -41,14 +41,16 @@ namespace TrybeHotel.Repository
                 Name = newRoom.Entity.Name,
                 Capacity = newRoom.Entity.Capacity,
                 Image = newRoom.Entity.Image,
-                Hotel = new HotelDto
-                {
-                    HotelId = newRoom.Entity.Hotel.HotelId,
-                    Name = newRoom.Entity.Hotel.Name,
-                    Address = newRoom.Entity.Hotel.Address,
-                    CityId = newRoom.Entity.Hotel.CityId,
-                    CityName = newRoom.Entity.Hotel.City.Name
-                }
+                Hotel = _context.Hotels.Where(hotel => hotel.HotelId == room.HotelId)
+                    .Select(hotel => new HotelDto
+                    {
+                        HotelId = hotel.HotelId,
+                        Name = hotel.Name,
+                        Address = hotel.Address,
+                        CityId = hotel.CityId,
+                        CityName = hotel.City.Name                     
+                    }).FirstOrDefault()
+
             };
             _context.SaveChanges();
 
