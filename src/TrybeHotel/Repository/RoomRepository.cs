@@ -41,7 +41,7 @@ namespace TrybeHotel.Repository
                 Name = newRoom.Entity.Name,
                 Capacity = newRoom.Entity.Capacity,
                 Image = newRoom.Entity.Image,
-                Hotel = _context.Hotels.Where(hotel => hotel.HotelId == room.HotelId)
+                Hotel = _context.Hotels.Where(hotel => hotel.HotelId == newRoom.Entity.HotelId)
                     .Select(hotel => new HotelDto
                     {
                         HotelId = hotel.HotelId,
@@ -60,7 +60,9 @@ namespace TrybeHotel.Repository
         // 8. Desenvolva o endpoint DELETE /room/:roomId
         public void DeleteRoom(int RoomId)
         {
-            throw new NotImplementedException();
+            var findRoom = _context.Rooms.Find(RoomId);
+            _context.Rooms.Remove(findRoom);
+            _context.SaveChanges();
         }
     }
 }
